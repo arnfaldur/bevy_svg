@@ -48,8 +48,8 @@ fn run(mut commands: Commands, asset_server: Res<AssetServer>, mut fsm: Local<Tu
         TutorialFsm::Wait(handle, frames) => {
             if *frames > 0 {
                 *fsm = TutorialFsm::Wait(handle.clone(), *frames - 1);
-            } else if let Some(svg) = asset_server.get_handle("neutron_star.svg") {
-                commands.spawn((Svg2d(svg), Origin::Center));
+            } else {
+                commands.spawn((Svg2d(handle.clone()), Origin::Center));
 
                 *fsm = TutorialFsm::Loaded;
                 dbg!("We loaded");

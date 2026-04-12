@@ -1,4 +1,4 @@
-use crate::{origin::Origin, svg::Svg};
+use crate::svg::Svg;
 use bevy::{
     asset::{Handle, uuid_handle},
     ecs::{component::Component, lifecycle::HookContext, world::DeferredWorld},
@@ -17,7 +17,7 @@ pub use plugin::RenderPlugin;
 
 /// A component for 2D SVGs.
 #[derive(Component, Default)]
-#[require(Mesh2d, Origin)]
+#[require(Mesh2d)]
 #[component(on_insert = svg_2d_on_insert)]
 pub struct Svg2d(pub Handle<Svg>);
 

@@ -14,11 +14,11 @@ pub const SVG_3D_SHADER_HANDLE: Handle<Shader> =
 
 pub use plugin::RenderPlugin;
 
-use crate::{origin::Origin, svg::Svg};
+use crate::svg::Svg;
 
 /// A component for 3D SVGs.
 #[derive(Component, Default)]
-#[require(Mesh3d, Origin, MeshMaterial3d<Svg>)]
+#[require(Mesh3d, MeshMaterial3d<Svg>)]
 #[component(on_insert = svg_3d_on_insert)]
 pub struct Svg3d(pub Handle<Svg>);
 
