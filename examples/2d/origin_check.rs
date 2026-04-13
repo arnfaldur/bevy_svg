@@ -1,4 +1,4 @@
-use bevy::color::palettes::css::RED;
+use bevy::color::palettes::css::GREEN_YELLOW;
 use bevy::prelude::*;
 use bevy_svg::prelude::*;
 
@@ -44,6 +44,6 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 
 fn draw_anchors(mut gizmos: Gizmos) {
     for (_, pos) in ANCHORS {
-        gizmos.circle_2d(Isometry2d::from_translation(pos), 4.0, RED);
+        gizmos.circle_2d(Isometry2d::from_translation(pos), 4.0, GREEN_YELLOW);
     }
 }
