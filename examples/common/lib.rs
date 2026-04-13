@@ -67,6 +67,11 @@ fn setup_legend(mut commands: Commands, asset_server: Res<AssetServer>) {
                 TextFont::from_font_size(20.0).with_font(font_bold.clone()),
             ));
             commands.spawn(TextSpan::new(" - Toggle visibility"));
+            commands.spawn((
+                TextSpan::new("\nQ"),
+                TextFont::from_font_size(20.0).with_font(font_bold.clone()),
+            ));
+            commands.spawn(TextSpan::new(" - Quit"));
         });
 }
 
@@ -77,6 +82,7 @@ pub struct DontChange;
 /// origin when 'O' is pressed.
 fn keyboard_input_system(
     keyboard_input: Res<ButtonInput<KeyCode>>,
+    mut exit: MessageWriter<AppExit>,
     mut svg_query: Query<
         (&mut Origin, &mut Visibility),
         (Or<(With<Svg2d>, With<Svg3d>)>, Without<DontChange>),
@@ -91,7 +97,9 @@ fn keyboard_input_system(
         ),
     >,
 ) {
-    if keyboard_input.just_pressed(KeyCode::KeyV) {
+    if keyboard_input.just_pressed(KeyCode::KeyQ) {
+        exit.write(AppExit::Success);
+    } else if keyboard_input.just_pressed(KeyCode::KeyV) {
         for (_, mut visible) in svg_query.iter_mut() {
             *visible = match *visible {
                 Visibility::Hidden => Visibility::Inherited,
